@@ -18,7 +18,7 @@ class Road{
     }
 
     void move(float dt){
-      disp -= (dt/1000) * moveSpeed;
+      disp -= dt * moveSpeed;
       for(int i = 0; i<tarmac.length; i++){
           tarmac[i].move(disp);
       }

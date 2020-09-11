@@ -1,4 +1,3 @@
-
 class Grid{
     private int cols, rows;
     private float disp = 0;
@@ -20,10 +19,22 @@ class Grid{
     }
     
     void move(float dt){
-      disp -= (dt/1000) * moveSpeed;
-      for(int i = 0; i<cells.length; i++){
-          cells[i].move(disp);
-      }
+      disp -= dt * moveSpeed;
+
+
+        for(int a = 0; a < rows-1; a++){
+            for(int b = 0; b< cols-1; b++){
+                if(abs(b-(cols/2)) > roadHWidth){
+                    cells[a * cols + b].move(disp);  
+                }
+            }
+        }
+
+    //   for(int i = 0; i<cells.length; i++){
+    //     if(abs(b-(cols/2)) > roadHWidth){
+    //         cells[i].move(disp);  
+    //     }
+    //   }
     }
       
 
@@ -36,7 +47,7 @@ class Grid{
         fill(0);
         push();
         translate(0,0,-15);
-        //rect(0,0,gridWidth,gridHeight);
+        rect(0,0,gridWidth,gridHeight);
         pop();
 
         beginShape(TRIANGLE_STRIP);
@@ -64,7 +75,8 @@ class Grid{
         Cell c = cells[a*cols + b];
         if(abs(b-(cols/2)) > roadHWidth){
             fill(0);
-            stroke(255);
+            // stroke(255);
+            stroke(color(0, 175, 255));
             //noStroke();
             vertex(c.getX(),c.getY(),c.getZ());
         }else{

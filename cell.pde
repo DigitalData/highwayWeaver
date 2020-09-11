@@ -1,6 +1,6 @@
 class Cell{
-    private float x, y, z, distance, myMin, myMax;
-    
+    private float x, y, z = 1, distance, myMin, myMax;
+
     Cell(float i,float j, float dist){
         x = i;
         y = j;
@@ -14,7 +14,13 @@ class Cell{
     }
 
     private void updateZ(float d){
-        z = map(noise(x/noiseSize,(y/noiseSize) + d), 0,1,myMin,myMax);
+        // if(distance > 3){
+            z = map(noise(x/noiseSize,(y/noiseSize) + d), 0,1,myMin,myMax);
+        // }else{
+        //     if(z > -1){
+        //         z = map(random(1), 0, 1, myMin, myMax);
+        //     }
+        // }
         //z = 0;
     }
 
@@ -27,8 +33,10 @@ class Cell{
 
         // System 2: make 2 blocks distances only affect z from noise by 10%;
         if(distance <= 3){
-            myMax = 33;
-            myMin = 22;
+            // myMax = 255;
+            // myMin = 0;
+            myMax = 40;
+            myMin = 10;
         }else if(distance <= 4){
             myMax = 0.1 * maxHeight;
             myMin = 0.1 * minHeight;
